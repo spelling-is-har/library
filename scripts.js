@@ -64,7 +64,7 @@ function createCards() {
 
   for (book of myLibrary) {
     const card = document.createElement("div");
-    card.classList.add(".card");
+    card.classList.add("card");
 
     const title = document.createElement("h3");
     title.innerText = book.title;
