@@ -93,6 +93,8 @@ function createAuthor(book) {
 function createPages(book) {
   const pages = document.createElement("p");
   pages.innerText = book.pages;
+
+  return pages;
 }
 
 //creates a button to keep track of whether the book has been read or not
