@@ -13,10 +13,26 @@ function Book(author, title, pages, read) {
   this.read = read;
 }
 
-const newBook = new Book("jon", "jons book", 123, true);
+const form = document.querySelector("#makeBookForm");
 
-console.log(newBook);
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const author = document.querySelector("#author");
+  const title = document.querySelector("#title");
+  const pages = document.querySelector("#pages");
 
-function addBookToLibrary(book) {
-  myLibrary.push(book);
+  const read = readOrNot();
+
+  const newBook = new Book(author.value, title.value, pages.value, read);
+  myLibrary.push(newBook);
+});
+
+function readOrNot() {
+  const read = document.querySelector("#read");
+  const notRead = document.querySelector("#notRead");
+
+  if (read.checked) return true;
+  if (notRead.checked) return false;
+
+  return;
 }
