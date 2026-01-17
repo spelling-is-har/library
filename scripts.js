@@ -75,12 +75,45 @@ function createCards() {
     const pages = document.createElement("p");
     pages.innerText = book.pages;
 
-    const read = document.createElement("p");
+    //form stuff
+
+    // TO DO ADD ID TO THE FORM AND CHANGE THE ARRAY WHEN THE READ/NOT READ IS CHANGED
+    const readForm = document.createElement("form");
+
+    const readLabel = document.createElement("label");
+    readLabel.htmlFor = "read";
+    readLabel.innerText = "Read";
+
+    const radioRead = document.createElement("input");
+    radioRead.setAttribute("type", "radio");
+    radioRead.setAttribute("name", "read");
+    radioRead.value = "true";
+
+    const notReadLabel = document.createElement("label");
+    notReadLabel.htmlFor = "read";
+    notReadLabel.innerText = "Not Read";
+
+    const radioNotRead = document.createElement("input");
+    radioNotRead.setAttribute("type", "radio");
+    radioNotRead.setAttribute("name", "read");
+    radioNotRead.value = "false";
+
     if (book.read) {
-      read.innerText = "Read";
+      radioRead.checked = true;
     } else {
-      read.innerText = "Not Read";
+      radioNotRead.checked = true;
     }
+
+    readForm.append(readLabel, radioRead, notReadLabel, radioNotRead);
+
+    // End form stuff
+
+    // const read = document.createElement("p");
+    // if (book.read) {
+    //   read.innerText = "Read";
+    // } else {
+    //   read.innerText = "Not Read";
+    // }
 
     const clearButton = document.createElement("button");
     clearButton.innerText = "Clear";
@@ -95,7 +128,7 @@ function createCards() {
       createCards();
     });
 
-    card.append(title, author, pages, read, clearButton);
+    card.append(title, author, pages, readForm, clearButton);
     cardsContainer.append(card);
   }
 }
