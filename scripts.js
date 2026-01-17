@@ -48,6 +48,7 @@ form.addEventListener("submit", (event) => {
   createCards();
 });
 
+//initial check to see if the book has been read or not when a book is created
 function readOrNot() {
   const read = document.querySelector("#read");
   const notRead = document.querySelector("#notRead");
@@ -94,48 +95,29 @@ function createPages(book) {
   pages.innerText = book.pages;
 }
 
-function createForm(book, card) {
-  const readForm = document.createElement("form");
-
-  const readLabel = document.createElement("label");
-  readLabel.htmlFor = "read";
-  readLabel.innerText = "Read";
-
-  const radioRead = document.createElement("input");
-  radioRead.setAttribute("type", "radio");
-  radioRead.setAttribute("name", "read");
-  radioRead.value = "true";
-
-  radioRead.addEventListener("change", (event) => {
-    event.preventDefault();
-    updateRead(card, radioRead);
-  });
-
-  const notReadLabel = document.createElement("label");
-  notReadLabel.htmlFor = "read";
-  notReadLabel.innerText = "Not Read";
-
-  const radioNotRead = document.createElement("input");
-  radioNotRead.setAttribute("type", "radio");
-  radioNotRead.setAttribute("name", "read");
-  radioNotRead.value = "false";
-
-  radioNotRead.addEventListener("change", (event) => {
-    event.preventDefault();
-    updateRead(card, radioNotRead);
-  });
-
+//creates a button to keep track of whether the book has been read or not
+function createReadButton(book, card) {
+  const readButton = document.createElement("button");
   if (book.read) {
-    radioRead.checked = true;
+    readButton.innerText = "READ";
   } else {
-    radioNotRead.checked = true;
+    readButton.innerText = "NOT READ";
   }
+  readButton.addEventListener("click", (event) => {
+    //keeps track of the state of the button and updates the array and the button
+    if (readButton.innerText === "READ") {
+      readButton.innerText = "NOT READ";
+      book.read = false;
+    } else {
+      readButton.innerText = "READ";
+      book.read = true;
+    }
+  });
 
-  readForm.append(readLabel, radioRead, notReadLabel, radioNotRead);
-
-  return readForm;
+  return readButton;
 }
 
+//creates a button to clear the card and the entry in myLibrary[]
 function createClear(book) {
   const clearButton = document.createElement("button");
   clearButton.innerText = "Clear";
@@ -152,6 +134,7 @@ function createClear(book) {
   return clearButton;
 }
 
+//function to create all the cards for the books in myLibrary[]
 function createCards() {
   const cardsContainer = document.querySelector(".cardsContainer");
   cardsContainer.innerHTML = "";
@@ -161,12 +144,10 @@ function createCards() {
     const title = createTitle(book);
     const author = createAuthor(book);
     const pages = createPages(book);
-    const readForm = createForm(book, card);
+    const readButton = createReadButton(book);
     const clearButton = createClear(book);
 
-    // End form stuff
-
-    card.append(title, author, pages, readForm, clearButton);
+    card.append(title, author, pages, readButton, clearButton);
     cardsContainer.append(card);
   }
 }
