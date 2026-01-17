@@ -58,6 +58,15 @@ function readOrNot() {
   return;
 }
 
+function updateRead(card, radio) {
+  for (let item of myLibrary) {
+    if (card.dataset.id === item.id) {
+      if (radio.value === "true") item.read = true;
+      else item.read = false;
+    }
+  }
+}
+
 function createCards() {
   const cardsContainer = document.querySelector(".cardsContainer");
   cardsContainer.innerHTML = "";
@@ -65,6 +74,7 @@ function createCards() {
   for (book of myLibrary) {
     const card = document.createElement("div");
     card.classList.add("card");
+    card.dataset.id = book.id;
 
     const title = document.createElement("h3");
     title.innerText = book.title;
@@ -77,7 +87,6 @@ function createCards() {
 
     //form stuff
 
-    // TO DO ADD ID TO THE FORM AND CHANGE THE ARRAY WHEN THE READ/NOT READ IS CHANGED
     const readForm = document.createElement("form");
 
     const readLabel = document.createElement("label");
@@ -89,6 +98,11 @@ function createCards() {
     radioRead.setAttribute("name", "read");
     radioRead.value = "true";
 
+    radioRead.addEventListener("change", (event) => {
+      event.preventDefault();
+      updateRead(card, radioRead);
+    });
+
     const notReadLabel = document.createElement("label");
     notReadLabel.htmlFor = "read";
     notReadLabel.innerText = "Not Read";
@@ -97,6 +111,11 @@ function createCards() {
     radioNotRead.setAttribute("type", "radio");
     radioNotRead.setAttribute("name", "read");
     radioNotRead.value = "false";
+
+    radioNotRead.addEventListener("change", (event) => {
+      event.preventDefault();
+      updateRead(card, radioNotRead);
+    });
 
     if (book.read) {
       radioRead.checked = true;
@@ -108,19 +127,11 @@ function createCards() {
 
     // End form stuff
 
-    // const read = document.createElement("p");
-    // if (book.read) {
-    //   read.innerText = "Read";
-    // } else {
-    //   read.innerText = "Not Read";
-    // }
-
     const clearButton = document.createElement("button");
     clearButton.innerText = "Clear";
     clearButton.dataset.id = book.id;
     clearButton.addEventListener("click", (event) => {
       event.preventDefault;
-
       const index = myLibrary.findIndex(
         (book) => book.id === clearButton.dataset.id
       );
