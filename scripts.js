@@ -59,15 +59,6 @@ function readOrNot() {
   return;
 }
 
-function updateRead(card, radio) {
-  for (let item of myLibrary) {
-    if (card.dataset.id === item.id) {
-      if (radio.value === "true") item.read = true;
-      else item.read = false;
-    }
-  }
-}
-
 function createCard(book) {
   const card = document.createElement("div");
   card.classList.add("card");
