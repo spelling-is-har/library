@@ -1,24 +1,43 @@
+:root {
+  --ivory-mist: #f8f4e3;
+  --dust-grey: #d5d0cd;
+  --ash-grey: #a2a392;
+  --blush-rose: #db5375;
+}
+
 body {
   display: grid;
   grid-template-columns: 1fr 4fr;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--ivory-mist);
+}
+
+.header {
+  grid-column: 1/3;
+  background-color: var(--ivory-mist);
+}
+
+.sidebar {
+  grid-column: 1/2;
+  display: flex;
+  background-color: var(--dust-grey);
+  height: 100%;
+  padding: 15px;
 }
 
 form {
-  grid-column: 1/2;
   display: flex;
   flex-direction: column;
-  background-color: aquamarine;
   height: 100%;
-  padding: 20px;
 }
 
 .cardsContainer {
   grid-column: 2/3;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  margin: 30px;
+  padding: 30px;
   gap: 30px;
+  background-color: var(--ivory-mist);
 }
 
 .card {
