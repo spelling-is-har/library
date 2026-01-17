@@ -60,6 +60,7 @@ function readOrNot() {
 
 function createCards() {
   const cardsContainer = document.querySelector(".cardsContainer");
+  cardsContainer.innerHTML = "";
 
   for (book of myLibrary) {
     const card = document.createElement("div");
@@ -81,7 +82,20 @@ function createCards() {
       read.innerText = "Not Read";
     }
 
-    card.append(title, author, pages, read);
+    const clearButton = document.createElement("button");
+    clearButton.innerText = "Clear";
+    clearButton.dataset.id = book.id;
+    clearButton.addEventListener("click", (event) => {
+      event.preventDefault;
+
+      const index = myLibrary.findIndex(
+        (book) => book.id === clearButton.dataset.id
+      );
+      myLibrary.splice(index, 1);
+      createCards();
+    });
+
+    card.append(title, author, pages, read, clearButton);
     cardsContainer.append(card);
   }
 }
