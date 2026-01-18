@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,20 +10,67 @@
   <body>
     <div class="header">
       <h1>Library</h1>
+      <div class="nav">
+        <ul>
+          <li>
+            <a href="#"
+              ><img
+                src="./images/home-account.png"
+                alt="Home Page"
+                width="40px"
+                height="40px"
+            /></a>
+          </li>
+          <li>
+            <a href="#"
+              ><img
+                src="./images/account-group.png"
+                alt="Social Page"
+                width="40px"
+                height="40px"
+            /></a>
+          </li>
+          <li>
+            <a href="#"
+              ><img
+                src="./images/cog.png"
+                alt="Settings Page"
+                width="40px"
+                height="40px"
+            /></a>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="sidebar">
       <form action="#" id="makeBookForm">
         <div class="inputsContainer">
-          <label for="author">Author</label>
-          <input type="text" id="author" name="author" required />
-          <label for="title">title</label>
-          <input type="text" name="title" id="title" required />
-          <label for="pages">Pages</label>
-          <input type="number" name="pages" id="pages" required />
-          <label for="read">Read</label>
-          <input type="radio" name="read" id="read" value="true" />
-          <label for="read">Not Read</label>
-          <input type="radio" name="read" id="notRead" value="false" checked />
+          <div class="inputContainer">
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" required />
+          </div>
+          <div class="inputContainer">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" required />
+          </div>
+          <div class="inputContainer">
+            <label for="pages">Pages</label>
+            <input type="number" name="pages" id="pages" required />
+          </div>
+          <div class="inputContainer">
+            <div class="radioButtons">
+              <label for="read">Read</label>
+              <input type="radio" name="read" id="read" value="true" />
+              <label for="read">Not Read</label>
+              <input
+                type="radio"
+                name="read"
+                id="notRead"
+                value="false"
+                checked
+              />
+            </div>
+          </div>
           <button type="submit" id="submitButton">Create Book</button>
         </div>
       </form>

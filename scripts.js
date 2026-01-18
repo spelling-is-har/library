@@ -17,17 +17,26 @@ const testBook2 = new Book(
   "Jonathan Winter",
   "This Dude Will Never Write a Book",
   126,
-  false
+  false,
 );
 const testBook3 = new Book("Mr. Potato Head", "A Life In Mash", 567, true);
 const testBook4 = new Book(
   "Dwayne Johnson",
   "How to Stop Wrestling",
   1276,
-  true
+  true,
 );
+const testBook5 = new Book("Mrs. Potato Head", "A Life as Mash", 631, false);
+const testBook6 = new Book("Jon", "I'm Coding From My Bed", 4792, true);
 
-const myLibrary = [testBook, testBook2, testBook3, testBook4];
+const myLibrary = [
+  testBook,
+  testBook2,
+  testBook3,
+  testBook4,
+  testBook5,
+  testBook6,
+];
 
 const form = document.querySelector("#makeBookForm");
 
@@ -76,14 +85,14 @@ function createTitle(book) {
 
 function createAuthor(book) {
   const author = document.createElement("h5");
-  author.innerText = book.author;
+  author.innerText = "By " + book.author;
 
   return author;
 }
 
 function createPages(book) {
   const pages = document.createElement("p");
-  pages.innerText = book.pages;
+  pages.innerText = book.pages + " pages.";
 
   return pages;
 }
@@ -92,18 +101,21 @@ function createPages(book) {
 function createReadButton(book, card) {
   const readButton = document.createElement("button");
   if (book.read) {
-    readButton.innerText = "READ";
+    readButton.innerText = "Read";
+    readButton.classList.add("read");
   } else {
-    readButton.innerText = "NOT READ";
+    readButton.innerText = "Not Read";
   }
   readButton.addEventListener("click", (event) => {
     //keeps track of the state of the button and updates the array and the button
-    if (readButton.innerText === "READ") {
-      readButton.innerText = "NOT READ";
+    if (readButton.innerText === "Read") {
+      readButton.innerText = "Not Read";
       book.read = false;
+      readButton.classList.remove("read");
     } else {
-      readButton.innerText = "READ";
+      readButton.innerText = "Read";
       book.read = true;
+      readButton.classList.add("read");
     }
   });
 
@@ -118,7 +130,7 @@ function createClear(book) {
   clearButton.addEventListener("click", (event) => {
     event.preventDefault;
     const index = myLibrary.findIndex(
-      (book) => book.id === clearButton.dataset.id
+      (book) => book.id === clearButton.dataset.id,
     );
     myLibrary.splice(index, 1);
     createCards();
@@ -140,7 +152,11 @@ function createCards() {
     const readButton = createReadButton(book);
     const clearButton = createClear(book);
 
-    card.append(title, author, pages, readButton, clearButton);
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("buttonContainer");
+    buttonContainer.append(readButton, clearButton);
+
+    card.append(title, author, pages, buttonContainer);
     cardsContainer.append(card);
   }
 }
